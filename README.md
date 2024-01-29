@@ -66,4 +66,16 @@ Caused by: org.crac.CheckpointException: null
         Suppressed: java.lang.RuntimeException: Native checkpoint failed.
 
 ```
-- why?
+- why? because some access to process in kernel is needed...
+```
+# I do not know why the full path to the "java" program is needed
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -Dspring.context.checkpoint=onRefresh -XX:CRaCCheckpointTo=/home/etomek/Desktop/checkpoint -jar build/libs/crac-0.0.1-SNAPSHOT.jar
+```
+
+#### Restoring the state
+```
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCRestoreFrom=/home/etomek/Desktop/checkpoint
+curl localhost:8080 
+```
+
+- it works :)
