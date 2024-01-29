@@ -3,7 +3,6 @@ spring:
     url: jdbc:mariadb://localhost:33306/vmx?useBulkStmts=false
     username: vmx
     password: vmx1234
-    platform: mariadb
   sql:
     init:
       platform: mariadb
