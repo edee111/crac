@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-internal class SomeController(
-    private val someSpringBean: SomeSpringBean,
+internal class HelloController(
+    private val personService: PersonService,
 ) {
 
     @GetMapping
-    fun hello() = someSpringBean.getHello()
+    fun hello() = personService.getHello()
 }

@@ -20,8 +20,8 @@ repositories {
 }
 
 dependencies {
-//	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//	implementation("org.mariadb.jdbc:mariadb-java-client")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.mariadb.jdbc:mariadb-java-client")
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.crac:crac:1.4.0")

@@ -6,3 +6,6 @@ spring:
   sql:
     init:
       platform: mariadb
+  jpa:
+    hibernate:
+      ddl-auto: update

@@ -12,7 +12,7 @@ See
 ```
 sdk use java 21.0.2.crac-zulu
 ./gradlew bootJar
-java -XX:CRaCCheckpointTo=/home/etomek/Desktop/checkpoint -Dspring.context.checkpoint=onRefresh -jar build/libs/crac-0.0.1-SNAPSHOT.jar
+java -XX:CRaCCheckpointTo=./checkpoint -Dspring.context.checkpoint=onRefresh -jar build/libs/crac-0.0.1-SNAPSHOT.jar
 ```
 
 #### When persistence is initialized
@@ -79,3 +79,6 @@ curl localhost:8080
 ```
 
 - it works :)
+
+#### Run with persistence
+- works the same like without it - just a different commit
