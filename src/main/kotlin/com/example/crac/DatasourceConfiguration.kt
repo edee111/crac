@@ -15,21 +15,21 @@ import java.util.logging.Logger
 import javax.sql.DataSource
 
 @Configuration
-@EnableJpaRepositories
+//@EnableJpaRepositories
 internal class DataSourceConfiguration {
 
-    @Bean
-    fun getDataSource(datasourceProperties: DataSourceProperties): DataSource {
-        val dataSourceBuilder = DataSourceBuilder.create()
-        dataSourceBuilder.driverClassName(datasourceProperties.driverClassName)
-        dataSourceBuilder.url(datasourceProperties.url)
-        dataSourceBuilder.username(datasourceProperties.username)
-        dataSourceBuilder.password(datasourceProperties.password)
-        @Suppress("UNCHECKED_CAST")
-        val ds = DatasourceWithCheckpointDecorator(dataSourceBuilder as DataSourceBuilder<HikariDataSource>)
-        Core.getGlobalContext().register(ds)
-        return ds
-    }
+//    @Bean
+//    fun getDataSource(datasourceProperties: DataSourceProperties): DataSource {
+//        val dataSourceBuilder = DataSourceBuilder.create()
+//        dataSourceBuilder.driverClassName(datasourceProperties.driverClassName)
+//        dataSourceBuilder.url(datasourceProperties.url)
+//        dataSourceBuilder.username(datasourceProperties.username)
+//        dataSourceBuilder.password(datasourceProperties.password)
+//        @Suppress("UNCHECKED_CAST")
+//        val ds = DatasourceWithCheckpointDecorator(dataSourceBuilder as DataSourceBuilder<HikariDataSource>)
+//        Core.getGlobalContext().register(ds)
+//        return ds
+//    }
 }
 
 class DatasourceWithCheckpointDecorator : DataSource, Resource {

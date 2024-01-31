@@ -12,7 +12,7 @@ See
 ```
 sdk use java 21.0.2.crac-zulu
 ./gradlew bootJar
-java -XX:CRaCCheckpointTo=./checkpoint -Dspring.context.checkpoint=onRefresh -jar build/libs/crac-0.0.1-SNAPSHOT.jar
+sudo java -XX:CRaCCheckpointTo=./checkpoint -Dspring.context.checkpoint=onRefresh -jar build/libs/crac-0.0.1-SNAPSHOT.jar
 ```
 
 #### When persistence is initialized
@@ -68,13 +68,13 @@ Caused by: org.crac.CheckpointException: null
 ```
 - why? because some access to process in kernel is needed...
 ```
-# I do not know why the full path to the "java" program is needed
-sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -Dspring.context.checkpoint=onRefresh -XX:CRaCCheckpointTo=/home/etomek/Desktop/checkpoint -jar build/libs/crac-0.0.1-SNAPSHOT.jar
+# Full path is needed because root user does not have settings from sdkman set
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -Dspring.context.checkpoint=onRefresh -XX:CRaCCheckpointTo=./checkpoint -jar build/libs/crac-0.0.1-SNAPSHOT.jar
 ```
 
 #### Restoring the state
 ```
-sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCRestoreFrom=/home/etomek/Desktop/checkpoint
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCRestoreFrom=./checkpoint
 curl localhost:8080 
 ```
 
@@ -82,3 +82,12 @@ curl localhost:8080
 
 #### Run with persistence
 - works the same like without it - just a different commit
+```
+sdk use java 21.0.2.crac-zulu
+./gradlew bootJar
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCCheckpointTo=./checkpoint -jar build/libs/crac-0.0.1-SNAPSHOT.jar
+# do some GET http://localhost:8080/
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/jcmd build/libs/crac-0.0.1-SNAPSHOT.jar JDK.checkpoint
+sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCRestoreFrom=./checkpoint
+
+```
