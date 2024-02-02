@@ -8,11 +8,11 @@ See
 - https://foojay.io/today/springboot-3-2-crac/
 
 
-### How to try
+### How I tried
 ```
 sdk use java 21.0.2.crac-zulu
 ./gradlew bootJar
-sudo java -XX:CRaCCheckpointTo=./checkpoint -Dspring.context.checkpoint=onRefresh -jar build/libs/crac-0.0.1-SNAPSHOT.jar
+java -XX:CRaCCheckpointTo=./checkpoint -Dspring.context.checkpoint=onRefresh -jar build/libs/crac-0.0.1-SNAPSHOT.jar
 ```
 
 #### When persistence is initialized
@@ -53,7 +53,6 @@ Caused by: org.crac.CheckpointException: null
                 ... 17 common frames omitted
         ...
 ```
-- so it looks like the SB supports the checkpoint/restore but we need to implement `org.crac.Resource` ourselves in the current SB 3.2.2
 
 #### Run without persistence
 
@@ -81,13 +80,13 @@ curl localhost:8080
 - it works :)
 
 #### Run with persistence
-- works the same like without it - just a different commit
+- commands are the same like without persistence - just a different commit
 ```
 sdk use java 21.0.2.crac-zulu
 ./gradlew bootJar
 sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCCheckpointTo=./checkpoint -jar build/libs/crac-0.0.1-SNAPSHOT.jar
 # do some GET http://localhost:8080/
 sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/jcmd build/libs/crac-0.0.1-SNAPSHOT.jar JDK.checkpoint
+# but checkpoint does not work because the connections to the DB are still open for some reason
 sudo /home/etomek/.sdkman/candidates/java/21.0.2.crac-zulu/bin/java -XX:CRaCRestoreFrom=./checkpoint
-
 ```
